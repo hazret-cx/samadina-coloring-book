@@ -1,0 +1,101 @@
+/* ── Palette wrap ── */
+.palette-wrap {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 40;
+  pointer-events: none;
+}
+
+.palette-tray {
+  background: linear-gradient(175deg, rgba(248,239,215,0.98) 0%, #EDD9B0 100%);
+  border-top: 1.5px solid rgba(154,42,42,0.18);
+  border-radius: 22px 22px 0 0;
+  padding: 16px 16px max(28px, env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  transform: translateY(100%);
+  pointer-events: none;
+  box-shadow: 0 -6px 28px rgba(80,20,20,0.14);
+}
+.palette-tray.open {
+  pointer-events: all;
+  animation: palette-up 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.palette-tray.closing {
+  animation: palette-down 0.26s ease-in forwards;
+  pointer-events: none;
+}
+
+@keyframes palette-up {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+@keyframes palette-down {
+  from { transform: translateY(0); }
+  to   { transform: translateY(100%); }
+}
+
+/* ── Swatches ── */
+.swatch {
+  width: 36px; height: 26px;
+  border-radius: 7px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.22s ease;
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    inset 0 -2px 0 rgba(0,0,0,0.12);
+}
+
+/* Paint texture lines */
+.swatch::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 7px;
+  background: repeating-linear-gradient(
+    40deg,
+    transparent 0px, transparent 4px,
+    rgba(255,255,255,0.07) 4px, rgba(255,255,255,0.07) 5px
+  );
+  pointer-events: none;
+}
+
+.swatch.active {
+  transform: scale(1.2) translateY(-4px);
+  box-shadow:
+    0 6px 16px rgba(0,0,0,0.32),
+    0 0 0 2.5px white,
+    0 0 0 4px rgba(154,42,42,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.4);
+}
+.swatch:active { transform: scale(0.9); }
+
+/* Labels */
+.swatch-label {
+  position: absolute;
+  bottom: -17px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8px;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: rgba(80,30,30,0.6);
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.palette-tray.open .swatch-label { opacity: 1; }
+
+/* Drag handle indicator */
+.palette-handle {
+  width: 36px; height: 4px;
+  background: rgba(154,42,42,0.25);
+  border-radius: 2px;
+  margin: 0 auto 14px;
+}

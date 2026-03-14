@@ -1,17 +1,13 @@
 {
-  "name": "Samadina Colors",
-  "short_name": "Samadina",
-  "description": "Color the magic of Albanian art",
-  "start_url": "/",
+  "name": "Colours Of Albania",
+  "short_name": "Colours",
+  "description": "Colour the magic of Albanian art — by Samadina Art",
+  "start_url": "/samadina-coloring-book/",
   "display": "standalone",
-  "background_color": "#C8102E",
-  "theme_color": "#C8102E",
+  "background_color": "#F5ECD7",
+  "theme_color": "#F5ECD7",
   "orientation": "portrait",
   "icons": [
-    {
-      "src": "icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
-    }
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }
   ]
 }

@@ -1,0 +1,101 @@
+/* ── Page curl ── */
+.page-scene {
+  transition: transform var(--curl-dur) cubic-bezier(0.4, 0, 0.2, 1);
+}
+.page-scene.no-transition { transition: none !important; }
+
+/* ── Cover ── */
+.cover {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at top, #F8EFD8 0%, #EDD9B0 100%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.cover.hidden { display: none; }
+.cover.exit {
+  opacity: 0;
+  transform: scale(0.96);
+  pointer-events: none;
+}
+
+.cover-card {
+  text-align: center;
+  padding: 40px 32px 36px;
+  background: #FEFAF3;
+  border: 2px solid var(--red);
+  border-radius: 20px;
+  box-shadow:
+    0 12px 48px rgba(80,20,20,0.22),
+    0 2px 8px rgba(80,20,20,0.10);
+  max-width: 290px;
+  width: 84%;
+}
+.cover-eagle {
+  font-size: 62px;
+  margin-bottom: 14px;
+  display: block;
+  animation: eagle-breathe 3s ease-in-out infinite;
+}
+@keyframes eagle-breathe {
+  0%,100% { transform: scale(1); }
+  50%     { transform: scale(1.06); }
+}
+.cover-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(22px, 7vw, 28px);
+  color: var(--red);
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.cover-sub {
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  font-weight: 700;
+}
+.cover-divider {
+  width: 40px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  margin: 0 auto 20px;
+}
+.cover-tap {
+  font-size: 13px;
+  color: rgba(154,42,42,0.5);
+  letter-spacing: 0.5px;
+  animation: tap-pulse 2s ease-in-out infinite;
+}
+@keyframes tap-pulse {
+  0%,100% { opacity: 0.4; }
+  50%     { opacity: 1; }
+}
+
+/* ── Hint overlay ── */
+.hint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hint.hidden { display: none; }
+.hint-hand {
+  font-size: 54px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+  animation: hint-demo 2.4s ease-in-out forwards;
+}
+@keyframes hint-demo {
+  0%   { transform: translate(0, 20px) scale(1.1);   opacity: 0; }
+  15%  { opacity: 1; }
+  45%  { transform: translate(25px, 40px) scale(0.88); }
+  65%  { transform: translate(25px, 40px) scale(0.92); }
+  82%  { transform: translate(25px, 40px) scale(1.05); opacity: 1; }
+  100% { transform: translate(25px, 40px) scale(1);    opacity: 0; }
+}
